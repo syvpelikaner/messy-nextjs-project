@@ -1,14 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "./global.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import type { Metadata } from "next";
+import { Inter, Poppins } from "next/font/google";
+
+import { Header } from "@/app/components/header";
+import { Main } from "@/app/components/main";
+import { css } from "@styled-system/css";
+import { Footer } from "./components/footer";
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -24,9 +31,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body className={`${inter.variable} ${poppins.variable} ${body}`}>
+        <Header />
+        <Main>{children}</Main>
+        <Footer />
       </body>
     </html>
   );
 }
+
+const body = css({
+  minH: "screen",
+  display: "flex",
+  flexDir: "column",
+  bg: "background",
+  color: "text",
+});
