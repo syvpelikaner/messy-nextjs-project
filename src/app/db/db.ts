@@ -28,8 +28,8 @@ export class ImageRepository {
         return this.db.images.get(id);
     }
 
-    async add(image: ImageSchema) {
-        return this.db.images.add(image);
+    async add(image: Omit<ImageSchema, "id">) {
+        return this.db.images.add({ ...image, updatedAt: Date.now() });
     }
 
     async update(image: Partial<ImageSchema>) {
